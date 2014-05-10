@@ -23,7 +23,6 @@ d3.tsv("EmployeeRecords.tsv", function(d) {
         var f, tAux, t = [];
         for (var i = 0; i < data.nodes.length; i++) {
             if (d.From.split("@")[0] === data.nodes[i].email.split("@")[0]) {
-                console.log(d.From + " === " + data.nodes[i].email);
                 f = i;
                 break;
             }
@@ -76,6 +75,25 @@ d3.tsv("EmployeeRecords.tsv", function(d) {
         }
 
         data.links = [];
+        data.subjects = [];
+        var subjAux = {};
+        for (var i = 0; i < rows2.length; i++) {
+            rows2[i].subject = rows2[i].subject.replace(/RE:/, "");
+            rows2[i].subject = rows2[i].subject.trim();
+            if(subjAux[rows2[i].subject]){
+                subjAux[rows2[i].subject].freq++;
+                subjAux[rows2[i].subject].date.push(rows2[i].date);
+            }else{
+                 subjAux[rows2[i].subject] = {};
+                subjAux[rows2[i].subject].freq = 1;
+                subjAux[rows2[i].subject].date = [];
+                subjAux[rows2[i].subject].date.push(rows2[i].date);
+                
+            }
+        }
+        for(var text in subjAux){
+            data.subjects.push({"text":text+subjAux[text].date, "frequency":subjAux[text].freq});
+        }
         graph.forEachEdge(function(e) {
 
             if (!(e.visited)) {

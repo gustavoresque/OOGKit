@@ -499,7 +499,7 @@ var GraphJs = (function() {
                 //Testa se o tipo dos vertices pretendidos é número ou string
                 if (typeof v1 === "number" && typeof v2 === "number" &&
                         this.existsVertex(v1) && this.existsVertex(v2)) {
-
+                    
                     var i = parseInt(v1);
                     var j = parseInt(v2);
                     for (var k = 0; k < list[i].length; k++) {
@@ -522,6 +522,7 @@ var GraphJs = (function() {
                     return null;
 
                 }
+                console.log("não entrou: "+v1+", "+v2);
             };
 
             graph.existsVertex = function(i) {
