@@ -64,7 +64,7 @@
             })
             .attr("font-family", "Serif")
             .attr("font-size", function(d) {
-                return Math.sqrt(d.frequency) * 4.5 + 8;
+                return Math.sqrt(d.frequency) * 4 + 6;
             })
             .sort(function(a, b) {
                 return b.frequency - a.frequency;
